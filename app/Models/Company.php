@@ -9,6 +9,13 @@ class Company extends Model
 {
     use HasFactory;
 
+    protected static function booted()
+    {
+        static::deleting(function ($company) {
+            $company->appointments()->delete();
+        });
+    }
+
     protected $fillable = [
         'name', 'slug', 'logo', 'address', 'city', 'state', 'country', 
         'phone', 'email', 'website', 'professional_name', 'professional_title', 
