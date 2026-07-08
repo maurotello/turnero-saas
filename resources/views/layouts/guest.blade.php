@@ -13,6 +13,34 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+        <!-- Dynamic Favicon -->
+        @php
+            $faviconCompany = null;
+            if (isset($company)) {
+                $faviconCompany = $company;
+            } elseif (auth()->check() && auth()->user()->company) {
+                $faviconCompany = auth()->user()->company;
+            }
+            
+            $defaultSvg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" rx="50" fill="#009BA4" /><path d="M30 40h40M35 25v10M65 25v10M30 80h40a10 10 0 0010-10V35a10 10 0 00-10-10H30a10 10 0 00-10 10v35a10 10 0 0010 10z" fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="6"/></svg>';
+            $base64DefaultSvg = base64_encode($defaultSvg);
+        @endphp
+
+        @if($faviconCompany)
+            @if($faviconCompany->logo)
+                <link rel="icon" type="image/{{ pathinfo($faviconCompany->logo, PATHINFO_EXTENSION) === 'svg' ? 'svg+xml' : 'png' }}" href="{{ asset('storage/' . $faviconCompany->logo) }}">
+            @else
+                @php
+                    $initial = strtoupper(substr($faviconCompany->name, 0, 1));
+                    $primaryColor = $faviconCompany->primary_color ?? '#009BA4';
+                    $svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" rx="20" fill="' . $primaryColor . '"/><text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-family="\'Inter\', sans-serif" font-weight="bold" font-size="60" fill="#FFFFFF">' . $initial . '</text></svg>';
+                    $base64Svg = base64_encode($svg);
+                @endphp
+                <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,{{ $base64Svg }}">
+            @endif
+        @else
+            <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,{{ $base64DefaultSvg }}">
+        @endif
     </head>
     <body class="font-sans text-gray-900 antialiased">
         <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-brand-gray relative overflow-hidden z-0">

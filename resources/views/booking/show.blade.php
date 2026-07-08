@@ -51,6 +51,9 @@
         } elseif (auth()->check() && auth()->user()->company) {
             $faviconCompany = auth()->user()->company;
         }
+        
+        $defaultSvg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" rx="50" fill="#009BA4" /><path d="M30 40h40M35 25v10M65 25v10M30 80h40a10 10 0 0010-10V35a10 10 0 00-10-10H30a10 10 0 00-10 10v35a10 10 0 0010 10z" fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="6"/></svg>';
+        $base64DefaultSvg = base64_encode($defaultSvg);
     @endphp
 
     @if($faviconCompany)
@@ -66,7 +69,7 @@
             <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,{{ $base64Svg }}">
         @endif
     @else
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+        <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,{{ $base64DefaultSvg }}">
     @endif
 </head>
 <body class="text-gray-800 antialiased min-h-screen flex flex-col">
