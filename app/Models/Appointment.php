@@ -10,6 +10,21 @@ class Appointment extends Model
 {
     use HasFactory, BelongsToCompany;
 
+    protected static function booted()
+    {
+        static::saving(function ($appointment) {
+            if (in_array($appointment->status, ['active', 'pending_payment', 'rescheduled'])) {
+                $dateStr = $appointment->date;
+                if ($dateStr instanceof \DateTimeInterface) {
+                    $dateStr = $dateStr->format('Y-m-d');
+                }
+                $appointment->active_slot_unique = "{$appointment->company_id}-{$dateStr}-{$appointment->time}";
+            } else {
+                $appointment->active_slot_unique = null;
+            }
+        });
+    }
+
     protected $fillable = [
         'company_id',
         'patient_id',
