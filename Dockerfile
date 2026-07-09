@@ -18,4 +18,6 @@ ENV RUN_SCRIPTS=1
 ENV REAL_IP_HEADER=1
 ENV COMPOSER_ALLOW_SUPERUSER=1
 
+COPY conf/nginx/nginx-site.conf /etc/nginx/sites-available/default.conf
+
 CMD ["/start.sh"]
