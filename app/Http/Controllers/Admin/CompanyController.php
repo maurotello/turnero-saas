@@ -34,35 +34,42 @@ class CompanyController extends Controller
         unset($data['logo']);
         unset($data['logo_cropped']);
 
-        if ($request->filled('logo_cropped')) {
-            $logoCropped = $request->input('logo_cropped');
-            if (preg_match('/^data:image\/(\w+);base64,/', $logoCropped, $type)) {
-                $image = substr($logoCropped, strpos($logoCropped, ',') + 1);
-                $type = strtolower($type[1]); // jpg, png, gif, jpeg, webp
+        $disk = config('filesystems.default');
 
-                if (in_array($type, ['jpg', 'jpeg', 'png', 'gif', 'webp'])) {
-                    $image = base64_decode($image);
+        try {
+            if ($request->filled('logo_cropped')) {
+                $logoCropped = $request->input('logo_cropped');
+                if (preg_match('/^data:image\/(\w+);base64,/', $logoCropped, $type)) {
+                    $image = substr($logoCropped, strpos($logoCropped, ',') + 1);
+                    $type = strtolower($type[1]); // jpg, png, gif, jpeg, webp
 
-                    if ($image !== false) {
-                        $fileName = 'logos/' . Str::random(40) . '.' . $type;
-                        
-                        // Eliminar el logo anterior si existe
-                        if ($company->logo) {
-                            \Illuminate\Support\Facades\Storage::disk('public')->delete($company->logo);
+                    if (in_array($type, ['jpg', 'jpeg', 'png', 'gif', 'webp'])) {
+                        $image = base64_decode($image);
+
+                        if ($image !== false) {
+                            $fileName = 'logos/' . Str::random(40) . '.' . $type;
+                            
+                            // Eliminar el logo anterior si existe
+                            if ($company->logo) {
+                                \Illuminate\Support\Facades\Storage::disk($disk)->delete($company->logo);
+                            }
+
+                            \Illuminate\Support\Facades\Storage::disk($disk)->put($fileName, $image);
+                            $data['logo'] = $fileName;
                         }
-
-                        \Illuminate\Support\Facades\Storage::disk('public')->put($fileName, $image);
-                        $data['logo'] = $fileName;
                     }
                 }
+            } elseif ($request->hasFile('logo')) {
+                // Eliminar el logo anterior si existe
+                if ($company->logo) {
+                    \Illuminate\Support\Facades\Storage::disk($disk)->delete($company->logo);
+                }
+                $path = $request->file('logo')->store('logos', $disk);
+                $data['logo'] = $path;
             }
-        } elseif ($request->hasFile('logo')) {
-            // Eliminar el logo anterior si existe
-            if ($company->logo) {
-                \Illuminate\Support\Facades\Storage::disk('public')->delete($company->logo);
-            }
-            $path = $request->file('logo')->store('logos', 'public');
-            $data['logo'] = $path;
+        } catch (\Throwable $e) {
+            \Illuminate\Support\Facades\Log::error('Error de subida a R2 (Logo Empresa): ' . $e->getMessage());
+            return back()->with('error', 'No se pudo subir el logo. Por favor, intenta de nuevo.')->withInput();
         }
 
         unset($data['logo_cropped']);

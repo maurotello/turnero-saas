@@ -70,7 +70,7 @@
 
     @if($faviconCompany)
         @if($faviconCompany->logo)
-            <link rel="icon" type="image/{{ pathinfo($faviconCompany->logo, PATHINFO_EXTENSION) === 'svg' ? 'svg+xml' : 'png' }}" href="{{ asset('storage/' . $faviconCompany->logo) }}">
+            <link rel="icon" type="image/{{ pathinfo($faviconCompany->logo, PATHINFO_EXTENSION) === 'svg' ? 'svg+xml' : 'png' }}" href="{{ Storage::url($faviconCompany->logo) }}">
         @else
             @php
                 $initial = strtoupper(substr($faviconCompany->name, 0, 1));
@@ -93,7 +93,7 @@
         <div class="container">
             <a class="navbar-brand d-flex align-items-center gap-2" href="{{ route('booking.show', $company->slug) }}">
                 @if($company->logo)
-                    <img src="{{ asset('storage/' . $company->logo) }}" class="rounded-circle bg-light border" style="width: 40px; height: 40px; object-fit: cover;">
+                    <img src="{{ Storage::url($company->logo) }}" class="rounded-circle bg-light border" style="width: 40px; height: 40px; object-fit: cover;">
                 @else
                     <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; font-weight: 700;">
                         {{ strtoupper(substr($company->name, 0, 1)) }}

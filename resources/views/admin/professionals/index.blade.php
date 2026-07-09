@@ -40,7 +40,7 @@
                                 <td class="py-3 px-4">
                                     <div class="d-flex align-items-center gap-3">
                                         @if($professional->avatar)
-                                            <img src="{{ asset('storage/' . $professional->avatar) }}" class="rounded-circle border" style="width: 44px; height: 44px; object-fit: cover;">
+                                            <img src="{{ Storage::url($professional->avatar) }}" class="rounded-circle border" style="width: 44px; height: 44px; object-fit: cover;">
                                         @else
                                             <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center border" style="width: 44px; height: 44px; font-weight: 600; font-size: 0.95rem;">
                                                 {{ strtoupper(substr($professional->name, 0, 2)) }}

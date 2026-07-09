@@ -64,7 +64,7 @@
                         <td class="px-4 py-3">
                             <div class="d-flex align-items-center gap-3">
                                 @if($prof->avatar)
-                                    <img src="{{ asset('storage/' . $prof->avatar) }}" class="rounded-circle" style="width: 38px; height: 38px; object-fit: cover; border: 1px solid #dee2e6;">
+                                    <img src="{{ Storage::url($prof->avatar) }}" class="rounded-circle" style="width: 38px; height: 38px; object-fit: cover; border: 1px solid #dee2e6;">
                                 @else
                                     <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-center font-bold" style="width: 38px; height: 38px; font-size: 14px;">
                                         {{ strtoupper(substr($prof->name, 0, 2)) }}

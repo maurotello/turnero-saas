@@ -62,7 +62,7 @@
                             @if($professional->avatar)
                                 <div class="mt-3">
                                     <label class="form-label small d-block text-muted">Avatar Actual:</label>
-                                    <img src="{{ asset('storage/' . $professional->avatar) }}" class="rounded-circle img-thumbnail bg-light" style="width: 80px; height: 80px; object-fit: cover;">
+                                    <img src="{{ Storage::url($professional->avatar) }}" class="rounded-circle img-thumbnail bg-light" style="width: 80px; height: 80px; object-fit: cover;">
                                 </div>
                             @endif
                         </div>

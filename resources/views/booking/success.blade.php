@@ -24,7 +24,7 @@
 
     @if($faviconCompany)
         @if($faviconCompany->logo)
-            <link rel="icon" type="image/{{ pathinfo($faviconCompany->logo, PATHINFO_EXTENSION) === 'svg' ? 'svg+xml' : 'png' }}" href="{{ asset('storage/' . $faviconCompany->logo) }}">
+            <link rel="icon" type="image/{{ pathinfo($faviconCompany->logo, PATHINFO_EXTENSION) === 'svg' ? 'svg+xml' : 'png' }}" href="{{ Storage::url($faviconCompany->logo) }}">
         @else
             @php
                 $initial = strtoupper(substr($faviconCompany->name, 0, 1));

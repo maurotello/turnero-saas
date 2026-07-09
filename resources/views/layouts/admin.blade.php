@@ -113,7 +113,7 @@
 
     @if($faviconCompany)
         @if($faviconCompany->logo)
-            <link rel="icon" type="image/{{ pathinfo($faviconCompany->logo, PATHINFO_EXTENSION) === 'svg' ? 'svg+xml' : 'png' }}" href="{{ asset('storage/' . $faviconCompany->logo) }}">
+            <link rel="icon" type="image/{{ pathinfo($faviconCompany->logo, PATHINFO_EXTENSION) === 'svg' ? 'svg+xml' : 'png' }}" href="{{ Storage::url($faviconCompany->logo) }}">
         @else
             @php
                 $initial = strtoupper(substr($faviconCompany->name, 0, 1));
@@ -136,7 +136,7 @@
         <div class="mb-4 px-3 d-flex align-items-center gap-2">
             <div id="sidebarLogoContainer">
                 @if(auth()->user()->company->logo)
-                    <img src="{{ asset('storage/' . auth()->user()->company->logo) }}" id="sidebarLogo" class="rounded-circle bg-light border" style="width: 32px; height: 32px; object-fit: cover;">
+                    <img src="{{ Storage::url(auth()->user()->company->logo) }}" id="sidebarLogo" class="rounded-circle bg-light border" style="width: 32px; height: 32px; object-fit: cover;">
                 @endif
             </div>
             <div>
@@ -198,7 +198,7 @@
                 <button class="btn btn-link text-decoration-none dropdown-toggle d-flex align-items-center gap-2 p-0 border-0" type="button" id="userMenu" data-bs-toggle="dropdown" aria-expanded="false">
                     <div id="topbarUserImageContainer">
                         @if(auth()->user()->company->logo)
-                            <img src="{{ asset('storage/' . auth()->user()->company->logo) }}" id="topbarUserLogo" class="rounded-circle bg-light border" style="width: 36px; height: 36px; object-fit: cover;">
+                            <img src="{{ Storage::url(auth()->user()->company->logo) }}" id="topbarUserLogo" class="rounded-circle bg-light border" style="width: 36px; height: 36px; object-fit: cover;">
                         @else
                             <div id="topbarUserInitials" class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 36px; height: 36px; font-weight: 600; font-size: 0.85rem;">
                                 {{ strtoupper(substr(auth()->user()->name, 0, 2)) }}

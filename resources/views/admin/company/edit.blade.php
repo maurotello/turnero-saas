@@ -74,7 +74,7 @@
                         <input type="hidden" id="logoCropped" name="logo_cropped">
                         <div class="mt-3 text-center">
                             @if($company->logo)
-                                <img src="{{ asset('storage/' . $company->logo) }}" id="logoPreview" class="img-thumbnail rounded-circle bg-light shadow-sm" style="width: 120px; height: 120px; object-fit: cover;">
+                                <img src="{{ Storage::url($company->logo) }}" id="logoPreview" class="img-thumbnail rounded-circle bg-light shadow-sm" style="width: 120px; height: 120px; object-fit: cover;">
                             @else
                                 <img src="https://placehold.co/400x400?text=Logo" id="logoPreview" class="img-thumbnail rounded-circle bg-light shadow-sm" style="width: 120px; height: 120px; object-fit: cover;">
                             @endif

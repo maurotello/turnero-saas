@@ -58,7 +58,7 @@
 
     @if($faviconCompany)
         @if($faviconCompany->logo)
-            <link rel="icon" type="image/{{ pathinfo($faviconCompany->logo, PATHINFO_EXTENSION) === 'svg' ? 'svg+xml' : 'png' }}" href="{{ asset('storage/' . $faviconCompany->logo) }}">
+            <link rel="icon" type="image/{{ pathinfo($faviconCompany->logo, PATHINFO_EXTENSION) === 'svg' ? 'svg+xml' : 'png' }}" href="{{ Storage::url($faviconCompany->logo) }}">
         @else
             @php
                 $initial = strtoupper(substr($faviconCompany->name, 0, 1));
@@ -79,7 +79,7 @@
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
             <a href="{{ route('booking.show', $company->slug) }}" class="flex items-center gap-2 text-decoration-none">
                 @if($company->logo)
-                    <img src="{{ asset('storage/' . $company->logo) }}" class="rounded-full w-8 h-8 object-cover border border-gray-200">
+                    <img src="{{ Storage::url($company->logo) }}" class="rounded-full w-8 h-8 object-cover border border-gray-200">
                 @else
                     <div class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-bold text-xs">
                         {{ strtoupper(substr($company->name, 0, 1)) }}
@@ -158,7 +158,7 @@
         <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8 mb-6 border border-gray-100 flex flex-col md:flex-row items-center md:items-start gap-6 text-center md:text-left relative overflow-hidden">
             <div class="absolute top-0 right-0 w-32 h-32 bg-primary opacity-5 rounded-bl-full -z-0"></div>
             @if($company->logo)
-                <img src="{{ asset('storage/' . $company->logo) }}" alt="Logo" class="w-24 h-24 md:w-32 md:h-32 object-cover rounded-2xl shadow-sm border border-gray-100 flex-shrink-0 z-10">
+                <img src="{{ Storage::url($company->logo) }}" alt="Logo" class="w-24 h-24 md:w-32 md:h-32 object-cover rounded-2xl shadow-sm border border-gray-100 flex-shrink-0 z-10">
             @else
                 <div class="w-24 h-24 md:w-32 md:h-32 bg-gray-50 rounded-2xl flex items-center justify-center flex-shrink-0 text-primary border border-gray-100 z-10">
                     <i class="bi bi-building text-4xl opacity-50"></i>
@@ -250,7 +250,7 @@
                                     <div onclick="selectProfessional({{ $prof->id }})" id="prof-card-{{ $prof->id }}"
                                          class="professional-card border border-gray-200 rounded-xl p-4 flex items-center gap-4 cursor-pointer hover:border-primary hover:bg-primary/5 transition-all shadow-sm">
                                         @if($prof->avatar)
-                                            <img src="{{ asset('storage/' . $prof->avatar) }}" class="rounded-full w-14 h-14 object-cover border border-gray-200">
+                                            <img src="{{ Storage::url($prof->avatar) }}" class="rounded-full w-14 h-14 object-cover border border-gray-200">
                                         @else
                                             <div class="w-14 h-14 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm">
                                                 {{ strtoupper(substr($prof->name, 0, 2)) }}

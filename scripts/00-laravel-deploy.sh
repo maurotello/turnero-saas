@@ -9,3 +9,4 @@ php artisan view:cache
 
 echo "Corriendo migraciones..."
 php artisan migrate --force
+php artisan storage:link

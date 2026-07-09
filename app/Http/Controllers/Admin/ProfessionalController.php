@@ -32,7 +32,13 @@ class ProfessionalController extends Controller
         $data['is_active'] = $request->has('is_active');
 
         if ($request->hasFile('avatar')) {
-            $data['avatar'] = $request->file('avatar')->store('avatars', 'public');
+            try {
+                $disk = config('filesystems.default');
+                $data['avatar'] = $request->file('avatar')->store('avatars', $disk);
+            } catch (\Throwable $e) {
+                \Illuminate\Support\Facades\Log::error('Error de subida a R2 (Crear Profesional): ' . $e->getMessage());
+                return back()->with('error', 'No se pudo subir la foto de perfil. Por favor, intenta de nuevo.')->withInput();
+            }
         }
 
         Professional::create($data);
@@ -58,11 +64,17 @@ class ProfessionalController extends Controller
         unset($data['avatar']);
 
         if ($request->hasFile('avatar')) {
-            // Delete old avatar
-            if ($professional->avatar) {
-                Storage::disk('public')->delete($professional->avatar);
+            try {
+                $disk = config('filesystems.default');
+                // Delete old avatar
+                if ($professional->avatar) {
+                    Storage::disk($disk)->delete($professional->avatar);
+                }
+                $data['avatar'] = $request->file('avatar')->store('avatars', $disk);
+            } catch (\Throwable $e) {
+                \Illuminate\Support\Facades\Log::error('Error de subida a R2 (Actualizar Profesional): ' . $e->getMessage());
+                return back()->with('error', 'No se pudo subir la nueva foto de perfil. Por favor, intenta de nuevo.')->withInput();
             }
-            $data['avatar'] = $request->file('avatar')->store('avatars', 'public');
         }
 
         $professional->update($data);
@@ -87,7 +99,12 @@ class ProfessionalController extends Controller
 
         // Delete avatar if exists
         if ($professional->avatar) {
-            Storage::disk('public')->delete($professional->avatar);
+            try {
+                $disk = config('filesystems.default');
+                Storage::disk($disk)->delete($professional->avatar);
+            } catch (\Throwable $e) {
+                \Illuminate\Support\Facades\Log::warning('Error al eliminar avatar en R2 al borrar profesional: ' . $e->getMessage());
+            }
         }
 
         $professional->delete();
