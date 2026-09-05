@@ -72,7 +72,7 @@
                                     <span class="badge bg-secondary rounded-pill">{{ $company->users_count }} usuarios</span>
                                 </td>
                                 <td>
-                                    {{ $company->created_at->format('d/m/Y') }}
+                                    {{ $company->created_at ? $company->created_at->format('d/m/Y') : 'N/D' }}
                                 </td>
                             </tr>
                         @empty
