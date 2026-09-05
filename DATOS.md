@@ -1,5 +1,5 @@
 FTP_HOST: 50.31.174.69
-FTP_USER: admin.maurotello.com.ar
+FTP_USER: admin@turnero.maurotello.com.ar
 FTP_PASSWPORD: desaTELLO123$%&
 
 DB_DATABASE: nsjtttoa_turnero
