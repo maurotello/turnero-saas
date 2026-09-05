@@ -12,11 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         $superadmin = \App\Models\User::where('role', 'superadmin')->first();
-        if ($superadmin) {
-            $superadmin->email = 'contacto@maurotello.com.ar';
-            $superadmin->password = \Illuminate\Support\Facades\Hash::make('password123$%&');
-            $superadmin->save();
-        } else {
+        if (!$superadmin) {
             \App\Models\User::create([
                 'name' => 'Super Admin',
                 'email' => 'contacto@maurotello.com.ar',
@@ -31,11 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        $superadmin = \App\Models\User::where('role', 'superadmin')->first();
-        if ($superadmin) {
-            $superadmin->email = 'superadmin@turnero.com';
-            $superadmin->password = \Illuminate\Support\Facades\Hash::make('superadmin123');
-            $superadmin->save();
-        }
+        \App\Models\User::where('email', 'contacto@maurotello.com.ar')->delete();
     }
 };
