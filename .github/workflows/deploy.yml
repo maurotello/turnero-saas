@@ -52,4 +52,4 @@ jobs:
 
       - name: Trigger Post-Deploy Artisan Commands
         run: |
-          curl -f -s -S -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" -X GET "https://turnero.maurotello.com.ar/api/deploy/trigger?token=mi_token_secreto_deploy_2026"
+          curl -f -sS -k -H "Host: turnero.maurotello.com.ar" "https://50.31.174.69/api/deploy/trigger?token=mi_token_secreto_deploy_2026"
