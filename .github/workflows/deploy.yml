@@ -52,4 +52,4 @@ jobs:
           
     - name: Trigger Post-Deploy Artisan Commands
       run: |
-        curl -s -X GET "https://turnero.maurotello.com.ar/api/deploy/trigger?token=${{ secrets.DEPLOY_TOKEN }}"
+        curl -f -s -S -X GET "https://turnero.maurotello.com.ar/api/deploy/trigger?token=${{ secrets.DEPLOY_TOKEN }}"
