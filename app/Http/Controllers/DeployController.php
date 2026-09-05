@@ -21,7 +21,7 @@ class DeployController extends Controller
             Log::info('Deploy iniciado vía Webhook');
 
             // Set maintenance mode
-            Artisan::call('down', ['--render' => 'errors::503', '--secret' => '1630542a-246b-4b66-afa1-dd72a4c43515']);
+            Artisan::call('down', ['--secret' => '1630542a-246b-4b66-afa1-dd72a4c43515']);
 
             // Run migrations
             Artisan::call('migrate', ['--force' => true]);
