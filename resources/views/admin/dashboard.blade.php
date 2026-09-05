@@ -120,6 +120,7 @@
                                 <th class="px-4">Paciente</th>
                                 <th>Fecha</th>
                                 <th>Hora</th>
+                                <th>Profesional</th>
                                 <th>Estado</th>
                                 <th class="text-end px-4">Acción</th>
                             </tr>
@@ -133,6 +134,9 @@
                                 </td>
                                 <td>{{ $app->date->format('d/m/Y') }}</td>
                                 <td>{{ \Carbon\Carbon::parse($app->time)->format('H:i') }} hs</td>
+                                <td>
+                                    <span class="small fw-medium">{{ $app->professional ? $app->professional->name : 'General' }}</span>
+                                </td>
                                 <td>
                                     <span class="badge rounded-pill bg-{{ $app->status === 'active' ? 'primary' : 'warning' }}">
                                         {{ $app->status }}

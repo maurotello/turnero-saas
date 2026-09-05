@@ -91,7 +91,10 @@
                                             </small>
                                         </td>
                                         <td class="py-3">
-                                            @if($company->professional_name)
+                                            @if($appointment->professional)
+                                                <span class="fw-medium text-dark d-block">{{ $appointment->professional->name }}</span>
+                                                <small class="text-muted d-block">{{ $appointment->professional->specialty ?? $company->specialty }}</small>
+                                            @elseif($company->professional_name)
                                                 <span class="fw-medium text-dark d-block">{{ $company->professional_title }} {{ $company->professional_name }}</span>
                                                 <small class="text-muted d-block">{{ $company->specialty }}</small>
                                             @else
