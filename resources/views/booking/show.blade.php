@@ -168,8 +168,12 @@
                 <div class="inline-block px-3 py-1 bg-blue-50 text-primary text-xs font-bold rounded-full mb-2 uppercase tracking-wide">
                     {{ $company->specialty ?? 'Salud' }}
                 </div>
-                <h1 class="text-2xl md:text-3xl font-bold text-gray-900 mb-1">{{ $company->professional_name }}</h1>
-                <p class="text-gray-500 font-medium text-sm md:text-base mb-4">{{ $company->professional_title ?? $company->name }}</p>
+                <h1 class="text-2xl md:text-3xl font-bold text-gray-900 mb-1">{{ $company->name }}</h1>
+                @if($professionals->count() === 1 && $company->professional_name)
+                    <p class="text-gray-500 font-medium text-sm md:text-base mb-4">{{ $company->professional_title }} {{ $company->professional_name }}</p>
+                @elseif($company->specialty)
+                    <p class="text-gray-500 font-medium text-sm md:text-base mb-4">{{ $company->specialty }}</p>
+                @endif
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm text-gray-600">
                     @if($company->email)
