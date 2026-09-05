@@ -19,4 +19,4 @@ desatello@gmail.com / 12345678
 
 Datos del Super Administrador
 contacto@maurotello.com.ar
-admin123
+password123$%&
