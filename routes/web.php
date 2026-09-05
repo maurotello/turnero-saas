@@ -20,6 +20,24 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::post('/contact', function (\Illuminate\Http\Request $request) {
+    $request->validate([
+        'name' => 'required|string',
+        'email' => 'required|email',
+        'message' => 'required|string',
+    ]);
+    
+    $content = "Nombre: {$request->name}\nEmail: {$request->email}\nTeléfono: {$request->phone}\nEspecialidad: {$request->specialty}\nMensaje:\n{$request->message}";
+    
+    \Illuminate\Support\Facades\Mail::raw($content, function ($msg) use ($request) {
+        $msg->to('contacto@maurotello.com.ar')
+            ->subject('Nuevo mensaje de contacto desde la Landing Page')
+            ->replyTo($request->email);
+    });
+
+    return back()->with('success', '¡Mensaje enviado correctamente! Nos pondremos en contacto a la brevedad.');
+})->name('contact.send');
+
 // --- RUTAS PÚBLICAS DEL TURNERO Y PORTAL DE PACIENTES ---
 Route::prefix('booking/{slug}')->group(function () {
     Route::get('/', [BookingController::class, 'show'])->name('booking.show');
@@ -96,7 +114,15 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
 
 // Alias para compatibilidad con Laravel Breeze
 Route::get('/dashboard', function () {
+    if (auth()->check() && auth()->user()->isSuperAdmin()) {
+        return redirect()->route('superadmin.dashboard');
+    }
     return redirect()->route('admin.dashboard');
-})->name('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+// --- RUTAS SUPER ADMIN ---
+Route::middleware(['auth', 'verified', 'role:super_admin'])->prefix('superadmin')->name('superadmin.')->group(function () {
+    Route::get('/dashboard', [App\Http\Controllers\SuperAdminController::class, 'index'])->name('dashboard');
+});
 
 require __DIR__.'/auth.php';

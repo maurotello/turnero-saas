@@ -158,12 +158,16 @@ class BookingController extends Controller
         }
 
         // Enviar Email con PDF adjunto (solo si es reserva directa/gratuita)
-        if (!empty($appointment->patient_email)) {
-            \Illuminate\Support\Facades\Mail::to($appointment->patient_email)
-                ->send(new \App\Mail\AppointmentConfirmation($appointment));
+        try {
+            if (!empty($appointment->patient_email)) {
+                \Illuminate\Support\Facades\Mail::to($appointment->patient_email)
+                    ->send(new \App\Mail\AppointmentConfirmation($appointment));
+            }
+        } catch (\Exception $e) {
+            \Illuminate\Support\Facades\Log::error('Error enviando email de confirmación: ' . $e->getMessage());
         }
         
-        return redirect()->route('booking.success', [$company->slug, $appointment->id]);
+        return redirect()->route('booking.success', ['slug' => $company->slug, 'appointment' => $appointment->id]);
     }
 
     public function paymentSuccess(Request $request, $slug)

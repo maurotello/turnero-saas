@@ -451,7 +451,7 @@
         </div>
         
         <div class="text-center mt-8 pb-8">
-            <p class="text-[11px] text-gray-400 font-medium uppercase tracking-wider">Desarrollado por <a href="https://vetrixweb.com" target="_blank" class="font-bold text-primary hover:underline">VETRIXWEB</a></p>
+            <p class="text-[11px] text-gray-400 font-medium uppercase tracking-wider">Desarrollado por <a href="https://maurotello.com.ar" target="_blank" class="font-bold text-primary hover:underline">Mauro Tello</a></p>
         </div>
     </div>
 

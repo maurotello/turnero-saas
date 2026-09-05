@@ -106,7 +106,7 @@
                                                         href="{{ route('login') }}">Ingresar</a>-->
                     @endauth
                     <a class="bg-brand-teal text-white px-6 py-2.5 rounded-full font-semibold text-sm hover:bg-brand-blue-deep transition animate-pulse"
-                        href="https://wa.me/542920503974" target="_blank" rel="noopener noreferrer">Solicitar demo</a>
+                        href="{{ url('/login') }}">Ingresa al sistema</a>
                 </div>
             </div>
         </div>
@@ -139,17 +139,8 @@
                     </p>
                     <div class="flex flex-wrap gap-4 mb-12">
                         <a class="bg-brand-teal text-white px-8 py-4 rounded-full font-bold hover:bg-brand-blue-deep transition shadow-lg shadow-teal-200/50"
-                            href="https://wa.me/542920503974" target="_blank" rel="noopener noreferrer">Quiero una demo
+                            href="https://wa.me/542920538998" target="_blank" rel="noopener noreferrer">Quiero una demo
                             gratis</a>
-                        <a class="border-2 border-brand-teal text-brand-teal px-8 py-4 rounded-full font-bold hover:bg-teal-50 transition flex items-center gap-2"
-                            href="https://wa.me/542920503974" target="_blank" rel="noopener noreferrer">
-                            <svg class="w-5 h-5" fill="currentColor" viewbox="0 0 24 24">
-                                <path
-                                    d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z">
-                                </path>
-                            </svg>
-                            Escribinos por WhatsApp
-                        </a>
                     </div>
                     <div class="grid grid-cols-3 gap-8">
                         <div>
@@ -1027,7 +1018,7 @@
                         personalizada para tu especialidad y forma de trabajar.</p>
                     <div class="space-y-8">
                         <a class="flex items-center gap-5 hover:opacity-85 transition group"
-                            href="https://wa.me/542920503974" target="_blank" rel="noopener noreferrer">
+                            href="https://wa.me/542920538998" target="_blank" rel="noopener noreferrer">
                             <div
                                 class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-brand-teal shadow-sm group-hover:bg-brand-teal group-hover:text-white transition-all duration-300">
                                 <svg class="w-6 h-6" fill="currentColor" viewbox="0 0 24 24">
@@ -1040,7 +1031,7 @@
                                 <div class="text-xs text-gray-400 font-bold uppercase tracking-wider">WHATSAPP</div>
                                 <div
                                     class="text-base md:text-lg font-bold text-brand-dark group-hover:text-brand-teal transition">
-                                    +54 2920 50-3974</div>
+                                    2920-538998</div>
                             </div>
                         </a>
                         <div class="flex items-center gap-5">
@@ -1054,7 +1045,7 @@
                             </div>
                             <div>
                                 <div class="text-xs text-gray-400 font-bold uppercase tracking-wider">EMAIL</div>
-                                <div class="text-base md:text-lg font-bold text-brand-dark">hola@vetrixweb.com</div>
+                                <div class="text-base md:text-lg font-bold text-brand-dark">contacto@maurotello.com.ar</div>
                             </div>
                         </div>
                         <div class="flex items-center gap-5">
@@ -1076,7 +1067,7 @@
                     </div>
                     <div class="mt-12">
                         <a class="inline-flex items-center gap-2 bg-brand-teal text-white px-6 py-3 rounded-full font-bold text-sm hover:bg-brand-blue-deep transition"
-                            href="https://wa.me/542920503974" target="_blank">
+                            href="https://wa.me/542920538998" target="_blank">
                             <svg class="w-4 h-4" fill="currentColor" viewbox="0 0 24 24">
                                 <path
                                     d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z">
@@ -1092,19 +1083,25 @@
                         <h3 class="text-2xl font-bold text-brand-dark mb-1">Escribinos</h3>
                         <p class="text-sm text-gray-500 font-medium">Respondemos en menos de 24 hs hábiles.</p>
                     </div>
-                    <form class="space-y-6">
+                    @if (session('success'))
+                        <div class="bg-green-50 text-green-700 p-4 rounded-xl mb-6 font-medium text-sm">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+                    <form action="{{ route('contact.send') }}" method="POST" class="space-y-6">
+                        @csrf
                         <div class="grid md:grid-cols-2 gap-6">
                             <div class="space-y-2">
                                 <label class="text-xs font-bold text-gray-500 uppercase ml-1">Nombre y apellido
                                     <span class="text-red-400">*</span></label>
-                                <input
+                                <input name="name" required
                                     class="w-full bg-gray-50 border-gray-200 rounded-xl px-4 py-3.5 text-base focus:ring-brand-teal focus:border-brand-teal text-brand-dark placeholder:text-gray-400"
                                     placeholder="Juan Pérez" type="text" />
                             </div>
                             <div class="space-y-2">
                                 <label class="text-xs font-bold text-gray-500 uppercase ml-1">Email <span
                                         class="text-red-400">*</span></label>
-                                <input
+                                <input name="email" required
                                     class="w-full bg-gray-50 border-gray-200 rounded-xl px-4 py-3.5 text-base focus:ring-brand-teal focus:border-brand-teal text-brand-dark placeholder:text-gray-400"
                                     placeholder="tu@email.com" type="email" />
                             </div>
@@ -1112,13 +1109,13 @@
                         <div class="grid md:grid-cols-2 gap-6">
                             <div class="space-y-2">
                                 <label class="text-xs font-bold text-gray-500 uppercase ml-1">Teléfono</label>
-                                <input
+                                <input name="phone"
                                     class="w-full bg-gray-50 border-gray-200 rounded-xl px-4 py-3.5 text-base focus:ring-brand-teal focus:border-brand-teal text-brand-dark placeholder:text-gray-400"
                                     placeholder="+54 9..." type="tel" />
                             </div>
                             <div class="space-y-2">
                                 <label class="text-xs font-bold text-gray-500 uppercase ml-1">Especialidad</label>
-                                <input
+                                <input name="specialty"
                                     class="w-full bg-gray-50 border-gray-200 rounded-xl px-4 py-3.5 text-base focus:ring-brand-teal focus:border-brand-teal text-brand-dark placeholder:text-gray-400"
                                     placeholder="Odontología, nutrición..." type="text" />
                             </div>
@@ -1126,7 +1123,7 @@
                         <div class="space-y-2">
                             <label class="text-xs font-bold text-gray-500 uppercase ml-1">Mensaje <span
                                     class="text-red-400">*</span></label>
-                            <textarea
+                            <textarea name="message" required
                                 class="w-full bg-gray-50 border-gray-200 rounded-xl px-4 py-3.5 text-base focus:ring-brand-teal focus:border-brand-teal text-brand-dark placeholder:text-gray-400"
                                 placeholder="Contanos brevemente cómo trabajás y qué necesitás..." rows="4"></textarea>
                         </div>
@@ -1182,25 +1179,25 @@
                     <ul class="space-y-3 text-sm text-gray-600">
                         <li class="flex items-center gap-2.5">
                             <a class="flex items-center gap-2.5 hover:text-brand-teal transition"
-                                href="https://wa.me/542920503974" target="_blank" rel="noopener noreferrer">
+                                href="https://wa.me/542920538998" target="_blank" rel="noopener noreferrer">
                                 <svg class="w-5 h-5 text-brand-teal" fill="currentColor" viewbox="0 0 24 24">
                                     <path
                                         d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z">
                                     </path>
                                 </svg>
-                                +54 2920 50-3974
+                                2920-538998
                             </a>
                         </li>
                         <li class="flex items-center gap-2.5">
                             <a class="flex items-center gap-2.5 hover:text-brand-teal transition"
-                                href="mailto:hola@vetrixweb.com">
+                                href="mailto:contacto@maurotello.com.ar">
                                 <svg class="w-5 h-5 text-brand-teal" fill="none" stroke="currentColor"
                                     viewbox="0 0 24 24">
                                     <path
                                         d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
                                     </path>
                                 </svg>
-                                hola@vetrixweb.com
+                                contacto@maurotello.com.ar
                             </a>
                         </li>
                     </ul>
@@ -1215,8 +1212,8 @@
                         <circle cx="1.5" cy="1" r="0.12" fill="#f6b426" />
                     </svg>
                     ©2026 TurneroMédico. Todos los derechos reservados. - <a
-                        class="hover:text-brand-teal transition font-bold" href="https://vetrixweb.com" target="_blank"
-                        rel="noopener noreferrer">VETRIXWEB</a>
+                        class="hover:text-brand-teal transition font-bold" href="https://maurotello.com.ar" target="_blank"
+                        rel="noopener noreferrer">Mauro Tello</a>
                 </p>
             </div>
         </div>
@@ -1256,7 +1253,7 @@
     <!-- END: Interactive Scripts -->
 
     <!-- Floating WhatsApp Button -->
-    <a href="https://wa.me/542920503974" target="_blank" rel="noopener noreferrer"
+    <a href="https://wa.me/542920538998" target="_blank" rel="noopener noreferrer"
         class="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-2xl hover:bg-[#128C7E] transition-all duration-300 hover:scale-110 flex items-center justify-center group"
         aria-label="Contactar por WhatsApp">
         <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">

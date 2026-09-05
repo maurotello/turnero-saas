@@ -41,7 +41,7 @@ class PatientAuthController extends Controller
             $request->session()->regenerate();
 
             // Redirect back to booking with preserved parameters if present
-            $params = $request->only(['professional_id', 'date', 'time']);
+            $params = $request->only(['professional_id', 'appointment_type_id', 'date', 'time']);
             return redirect()->route('booking.show', array_merge(['slug' => $slug], array_filter($params)));
         }
 
@@ -93,7 +93,7 @@ class PatientAuthController extends Controller
 
         auth('patient')->login($patient);
 
-        $params = $request->only(['professional_id', 'date', 'time']);
+        $params = $request->only(['professional_id', 'appointment_type_id', 'date', 'time']);
         return redirect()->route('booking.show', array_merge(['slug' => $slug], array_filter($params)))->with('success', 'Registro completado con éxito.');
     }
 

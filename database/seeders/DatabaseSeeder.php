@@ -88,5 +88,15 @@ class DatabaseSeeder extends Seeder
                 'is_active' => true,
             ]);
         }
+
+        // 6. Create Super Admin (Owner of the SaaS)
+        User::create([
+            'name' => 'Mauro Tello (Super Admin)',
+            'email' => 'contacto@maurotello.com.ar',
+            'password' => Hash::make('password123$%&'),
+            'company_id' => null,
+            'professional_id' => null,
+            'role' => 'super_admin',
+        ]);
     }
 }
